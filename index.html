@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Paste | MelonPastebin</title>
+</head>
+
+<style>
+    #copy_url_button {
+        visibility: hidden;
+        height: 3em;
+        min-width: 12.5%;
+    }
+
+    #input_textarea {
+        height: 10em;
+        width: 62%
+    }
+
+    #paste_button {
+        height: 3em;
+        width: 12.5%;
+    }
+
+    #content_url_area {
+        height: 1.5em;
+    }
+
+    #content_url {
+        font-family: monospace;
+        color: black;
+    }
+</style>
+
+<body>
+    <textarea id="input_textarea"></textarea>
+    <br>
+    <div id="content_url_area">Click Paste button to upload your content.</div>
+    <button id="paste_button" onclick="cilck_paste_button()">📋 Paste</button>
+    <button id="copy_url_button" onclick="click_copy_url_button()"></button>
+    <br>
+    <input type="text" id="copy_selector" style="visibility: hidden">
+
+</body>
+
+<script>
+    function click_copy_url_button() {
+        copy_text(document.getElementById('content_url').innerText)
+    }
+    function copy_text(text) {
+        var selector = document.getElementById("copy_selector")
+        selector.style.visibility = "visible"
+        selector.value = text
+        selector.select();
+        selector.setSelectionRange(0, 99999); /* For mobile devices */
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+        selector.style.visibility = "hidden"
+    }
+    function cilck_paste_button() {
+        document.getElementById("paste_button").disabled = true
+        document.getElementById("paste_button").innerText = "Uploading..."
+        var content_object = {
+            "content": document.getElementById("input_textarea").value
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var responseJSON = JSON.parse(this.responseText);
+                document.getElementById("copy_url_button").innerText = "🗒 Copy the link for your content";
+                var content_url = "http://paste.langua.moe/get.html?content_key=" + responseJSON.key
+                document.getElementById("content_url_area").innerHTML = "URL for your content: <a href = " + content_url + " target='_blank' id=content_url>" + content_url + "</a>"
+                document.getElementById("copy_url_button").style.visibility = "visible"
+                document.getElementById("paste_button").innerText = "📋 Paste"
+                document.getElementById("paste_button").disabled = false
+            }
+        };
+        xhttp.open("POST", "https://api.paste.langua.moe/api/v1/get_content/api/v1/paste", true);
+        xhttp.send(JSON.stringify(content_object));
+    }
+</script>
+
+</html>

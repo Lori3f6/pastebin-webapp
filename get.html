@@ -35,13 +35,14 @@
     <div id="paste_area">
         <br>
         Your Content:
-        <div id="paste_content">aaaaa</div>
+        <pre id="paste_content">aaaaa</pre>
         <button id="copy_button" onclick="click_copy_button()">📋 Copy</button>
     </div>
     <input type="text" id="copy_selector" style="visibility: hidden">
 </body>
 
 <script>
+    const apiUrl = "https://paste.api.langua.moe"
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const content_key = urlParams.get('content_key')
@@ -73,7 +74,7 @@
                 }
             }
         };
-        xhttp.open("GET", "https://paste.api.langua.moe/api/v1/get_content/" + content_key, true);
+        xhttp.open("GET", apiUrl + "/api/v1/get_content/" + content_key, true);
         xhttp.send();
     }
 

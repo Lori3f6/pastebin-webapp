@@ -45,6 +45,7 @@
 </body>
 
 <script>
+    const apiURL = "https://paste.api.langua.moe"
     function click_copy_url_button() {
         copy_text(document.getElementById('content_url').innerText)
     }
@@ -76,7 +77,7 @@
                 document.getElementById("paste_button").disabled = false
             }
         };
-        xhttp.open("POST", "https://paste.api.langua.moe/api/v1/paste", true);
+        xhttp.open("POST", apiURL + "/api/v1/paste", true);
         xhttp.send(JSON.stringify(content_object));
     }
 </script>

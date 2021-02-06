@@ -35,7 +35,7 @@
     <div id="paste_area">
         <br>
         Your Content:
-        <pre id="paste_content">aaaaa</pre>
+        <div id="paste_content"></div>
         <button id="copy_button" onclick="click_copy_button()">📋 Copy</button>
     </div>
     <input type="text" id="copy_selector" style="visibility: hidden">
@@ -64,8 +64,10 @@
             if (this.readyState == 4) {
                 if (this.status == 200) {
                     var responseJSON = JSON.parse(this.responseText);
-                    document.getElementById("paste_content").innerText = responseJSON.content
+                    document.getElementById("paste_content").innerText = responseJSON.content.replace(' ','&nbsp;')
                     document.getElementById("paste_area").style.visibility = "visible"
+                    document.getElementById("paste_button").innerText = "💬 Get"
+                    document.getElementById("paste_button").disabled = false
                 } else if (this.status == 404) {
                     document.getElementById("paste_content").innerText = "Error: Content not found"
                     document.getElementById("paste_content").style.color = "#800000"

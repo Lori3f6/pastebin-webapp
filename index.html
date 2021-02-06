@@ -36,7 +36,7 @@
 <body>
     <textarea id="input_textarea"></textarea>
     <br>
-    <div id="content_url_area">Click Paste button to upload your content.</div>
+    <div id="content_url_area">Click Paste button to upload your content</div>
     <button id="paste_button" onclick="cilck_paste_button()">📋 Paste</button>
     <button id="copy_url_button" onclick="click_copy_url_button()"></button>
     <br>
@@ -69,14 +69,14 @@
             if (this.readyState == 4 && this.status == 200) {
                 var responseJSON = JSON.parse(this.responseText);
                 document.getElementById("copy_url_button").innerText = "🗒 Copy the link for your content";
-                var content_url = "http://paste.langua.moe/get.html?content_key=" + responseJSON.key
+                var content_url = "http://paste.langua.moe/get?content_key=" + responseJSON.key
                 document.getElementById("content_url_area").innerHTML = "URL for your content: <a href = " + content_url + " target='_blank' id=content_url>" + content_url + "</a>"
                 document.getElementById("copy_url_button").style.visibility = "visible"
                 document.getElementById("paste_button").innerText = "📋 Paste"
                 document.getElementById("paste_button").disabled = false
             }
         };
-        xhttp.open("POST", "https://api.paste.langua.moe/api/v1/get_content/api/v1/paste", true);
+        xhttp.open("POST", "https://paste.api.langua.moe/api/v1/paste", true);
         xhttp.send(JSON.stringify(content_object));
     }
 </script>

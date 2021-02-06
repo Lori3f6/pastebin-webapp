@@ -63,7 +63,7 @@
             if (this.readyState == 4) {
                 if (this.status == 200) {
                     var responseJSON = JSON.parse(this.responseText);
-                    document.getElementById("paste_content").innerText = responseJSON.content
+                    document.getElementById("paste_content").innerText = responseJSON.content.replace(' ','&nbsp;')
                     document.getElementById("paste_area").style.visibility = "visible"
                     document.getElementById("paste_button").innerText = "💬 Get"
                     document.getElementById("paste_button").disabled = false

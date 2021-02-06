@@ -65,6 +65,7 @@
                     var responseJSON = JSON.parse(this.responseText);
                     document.getElementById("paste_content").innerText = responseJSON.content
                     document.getElementById("paste_area").style.visibility = "visible"
+                    document.getElementById("paste_button").disabled = false
                 } else if (this.status == 404) {
                     document.getElementById("paste_content").innerText = "Error: Content not found"
                     document.getElementById("paste_content").style.color = "#800000"

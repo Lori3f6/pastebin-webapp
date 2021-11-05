@@ -45,7 +45,7 @@
 </body>
 
 <script>
-    const apiURL = "https://paste.api.langua.moe"
+    const apiURL = "https://paste.api.melon.land"
     function click_copy_url_button() {
         copy_text(document.getElementById('content_url').innerText)
     }
@@ -70,7 +70,7 @@
             if (this.readyState == 4 && this.status == 200) {
                 var responseJSON = JSON.parse(this.responseText);
                 document.getElementById("copy_url_button").innerText = "🗒 Copy the link for your content";
-                var content_url = "https://paste.langua.moe/get?content_key=" + responseJSON.key
+                var content_url = "https://paste.melon.land/get?content_key=" + responseJSON.key
                 document.getElementById("content_url_area").innerHTML = "URL for your content: <a href = " + content_url + " target='_blank' id=content_url>" + content_url + "</a>"
                 document.getElementById("copy_url_button").style.visibility = "visible"
                 document.getElementById("paste_button").innerText = "📋 Paste"
